@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSession, setSession, setUser } from '../store/authSlice';
+import { AuthService } from '../services/auth';
+import type { AppDispatch, RootState } from '../store';
 
-// Placeholder screens - will be created in future tasks
+// Auth navigation
+import AuthStack from './AuthStack';
+
+// Main app screens
 import DashboardScreen from '../screens/DashboardScreen';
 import CalendarScreen from '../screens/CalendarScreen';
 import MessagesScreen from '../screens/MessagesScreen';
@@ -58,8 +66,69 @@ function TabNavigator() {
   );
 }
 
+// Loading Screen Component
+function LoadingScreen() {
+  return (
+    <View style={styles.loadingContainer}>
+      <ActivityIndicator size="large" color="#0ea5e9" />
+      <Text style={styles.loadingText}>Loading...</Text>
+    </View>
+  );
+}
+
 // Main App Navigator
 export default function AppNavigator() {
+  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch<AppDispatch>();
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    // Check for existing session on app start
+    const initializeAuth = async () => {
+      try {
+        const { session } = await AuthService.getSession();
+        
+        if (session) {
+          dispatch(setSession(session));
+          const { user } = await AuthService.getCurrentUser();
+          if (user) {
+            dispatch(setUser(user as any));
+          }
+        }
+      } catch (error) {
+        console.error('Auth initialization error:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initializeAuth();
+
+    // Listen for auth state changes
+    const { data: { subscription } } = AuthService.onAuthStateChange((event, session) => {
+      console.log('Auth state changed:', event, session ? 'Session exists' : 'No session');
+      dispatch(setSession(session));
+      
+      if (session?.user) {
+        dispatch(setUser(session.user as any));
+      } else {
+        dispatch(setUser(null));
+      }
+    });
+
+    return () => {
+      subscription?.unsubscribe();
+    };
+  }, [dispatch]);
+
+  if (isLoading) {
+    return (
+      <NavigationContainer>
+        <LoadingScreen />
+      </NavigationContainer>
+    );
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -67,9 +136,26 @@ export default function AppNavigator() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Main" component={TabNavigator} />
-        {/* Add auth screens, onboarding, etc. in future tasks */}
+        {isAuthenticated ? (
+          <Stack.Screen name="Main" component={TabNavigator} />
+        ) : (
+          <Stack.Screen name="Auth" component={AuthStack} />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
-} 
+}
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: '#6b7280',
+  },
+}); 
