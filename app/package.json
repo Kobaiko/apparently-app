@@ -16,6 +16,7 @@
     "@supabase/auth-js": "^2.70.0",
     "@supabase/postgrest-js": "^1.19.4",
     "expo": "~53.0.9",
+    "expo-linear-gradient": "^14.1.4",
     "expo-status-bar": "~2.2.3",
     "nativewind": "^4.1.23",
     "react": "19.0.0",
