@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './authSlice';
 
-// Placeholder for future slices
+// Configure store with auth slice
 const store = configureStore({
   reducer: {
-    // Add slices here as they are created
-    // auth: authSlice.reducer,
+    auth: authReducer,
+    // Add more slices here as they are created
     // user: userSlice.reducer,
     // etc.
   },
