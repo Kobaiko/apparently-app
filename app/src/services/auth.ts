@@ -1,5 +1,5 @@
-import { supabase } from './supabase';
-import type { User } from '@supabase/supabase-js';
+import { supabase } from './supabase-auth-only';
+import type { User } from '@supabase/auth-js';
 
 export interface AuthUser {
   id: string;

@@ -1,4 +1,4 @@
-import { supabase } from '../services/supabase';
+import { supabase } from '../services/supabase-auth-only';
 
 export async function testSupabaseConnection() {
   try {
