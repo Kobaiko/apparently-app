@@ -1,0 +1,1293 @@
+# Apparently Co-Parenting App - Product Requirements Document (PRD)
+
+## 1. Executive Summary
+
+### 1.1 Product Vision
+Apparently is a modern co-parenting application designed to simplify communication, coordination, and collaboration between separated parents. Built with React Native for cross-platform compatibility (iOS, Android, and Web), the app provides a centralized platform for managing custody schedules, sharing expenses, documenting children's moments, and maintaining healthy co-parenting relationships.
+
+### 1.2 Key Differentiators
+- **Multi-co-parenting support**: Unique ability to manage children with multiple co-parents
+- **Modern 2025 design**: Cutting-edge UI/UX following the latest design trends
+- **Cross-platform**: One codebase for web, iOS, and Android
+- **Privacy-focused**: Each co-parent only sees data related to their children
+- **Court-admissible records**: Tamper-proof documentation for legal purposes
+- **14-day free trial**: Risk-free evaluation period with premium features
+
+## 2. Market Analysis & Competitive Landscape
+
+### 2.1 Market Context
+Based on research of existing co-parenting apps (OurFamilyWizard, TalkingParents, AppClose, 2Houses, BestInterest), the market shows strong demand for digital co-parenting solutions. Key market insights:
+
+- Courts increasingly mandate or recommend co-parenting apps
+- Users prioritize ease of use, security, and comprehensive features
+- Price sensitivity exists, with many apps charging $10-25/month per parent
+- Free alternatives exist but lack premium features and court-admissible documentation
+
+### 2.2 Competitive Advantages
+- **Multi-partner support**: Unlike competitors, supports complex family structures
+- **Modern tech stack**: Superior performance and user experience
+- **Flexible pricing**: Competitive pricing through LemonSqueezy
+- **Design-first approach**: Focus on delightful user experience
+
+## 3. User Personas
+
+### 3.1 Primary Users
+1. **Recently Separated Parents**
+   - Need structure and boundaries in communication
+   - Seeking to reduce conflict and establish routines
+   - Value court-admissible documentation
+
+2. **Established Co-Parents**
+   - Have existing routines but need better organization
+   - Want to streamline expense tracking and scheduling
+   - Appreciate efficiency features
+
+3. **Multi-Partner Co-Parents**
+   - Have children with multiple ex-partners
+   - Need compartmentalized communication
+   - Require complex scheduling capabilities
+
+### 3.2 Secondary Users
+- Children (view-only access to relevant information)
+- Extended family members (grandparents, step-parents)
+- Legal professionals (attorneys, mediators)
+
+## 4. Core Features & Functionality
+
+### 4.1 Dashboard
+**Purpose**: Central hub for quick access to all features and notifications
+
+**Features**:
+- Personalized greeting with user's name
+- Today's schedule at a glance
+- Recent activity feed
+- Quick actions (add expense, create event, write journal entry)
+- Notification badges for pending items
+- Child switcher for multi-child families
+- Weekly/monthly overview widgets
+
+**Technical Requirements**:
+- Real-time data synchronization
+- Lazy loading for performance
+- Responsive grid layout using React Native's Flexbox
+- Pull-to-refresh functionality
+
+### 4.2 Calendar & Scheduling
+**Purpose**: Manage custody schedules, activities, and exchanges
+
+**Features**:
+- Visual custody calendar with color-coding per parent
+- Repeating schedule patterns (every other week, 2-2-3, etc.)
+- Single event creation and management
+- After-school activities tracking
+- Pick-up/drop-off location and time management
+- Schedule change requests with approval workflow
+- Holiday and special occasion management
+- Sync with device calendars (iOS Calendar, Google Calendar)
+- Time zone support for traveling parents
+
+**Technical Requirements**:
+- Custom calendar component with gesture support
+- Conflict detection algorithm
+- Push notifications for schedule changes
+- iCal export functionality
+
+### 4.3 Documents Area
+**Purpose**: Centralized storage for important child-related documents
+
+**Features**:
+- Organized folders per child
+- Document categories (medical, school, legal, identification)
+- File upload with preview (PDF, images, documents)
+- Version control for updated documents
+- Sharing permissions per document
+- Search functionality
+- Secure encryption for sensitive documents
+- Quick access to frequently used documents
+
+**Technical Requirements**:
+- Supabase Storage integration
+- File compression for faster uploads
+- Thumbnail generation for previews
+- End-to-end encryption for sensitive documents
+- Maximum file size: 50MB per document
+
+### 4.4 Journal & Moments
+**Purpose**: Share children's milestones, daily activities, and memories
+
+**Features**:
+- Rich text entries with formatting options
+- Photo and video uploads (multiple per entry)
+- Tagging system (#firstday, #milestone, #medical)
+- Comments and reactions from co-parents
+- Private notes option (not shared)
+- Timeline view of all entries
+- Search and filter capabilities
+- Export options for creating memory books
+
+**Technical Requirements**:
+- WYSIWYG editor implementation
+- Image optimization and compression
+- Video streaming capability
+- Lazy loading for media-heavy timelines
+- Background upload for large files
+
+### 4.5 Expense Management
+**Purpose**: Track shared expenses and manage reimbursements
+
+**Features**:
+- Expense entry with categories (medical, education, activities, etc.)
+- Receipt photo upload and attachment
+- Automatic split calculation (50/50, 60/40, custom)
+- Reimbursement requests and tracking
+- Payment status tracking (pending, paid, disputed)
+- Monthly/yearly expense reports
+- Export to CSV/PDF for tax purposes
+- Recurring expense support
+- Budget tracking and alerts
+
+**Technical Requirements**:
+- OCR integration for receipt scanning (future enhancement)
+- Real-time balance calculations
+- Data visualization for expense trends
+- Secure payment information handling (no actual payment processing in v1)
+
+### 4.6 Communication Hub
+**Purpose**: Centralized, documented communication between co-parents
+
+**Features**:
+- Threaded messaging system
+- Read receipts and timestamps
+- Uneditable message history (court-admissible)
+- File and photo sharing within messages
+- Message search functionality
+- Notification preferences (immediate, daily digest)
+- Translation support (future enhancement)
+- Emergency contact quick dial
+
+**Technical Requirements**:
+- End-to-end encryption for messages
+- Real-time messaging using Supabase Realtime
+- Message archival system
+- Export functionality for legal purposes
+
+### 4.7 Profile Management
+**Purpose**: User account and preference management
+
+**Features**:
+- Personal information management
+- Profile photo upload
+- Notification preferences
+- Privacy settings
+- Account security (2FA support)
+- Subscription management
+- Data export options
+- Account deletion with data retention options
+
+### 4.8 Notifications System
+**Purpose**: Keep users informed of important updates
+
+**Types**:
+- Schedule changes and requests
+- New journal entries
+- Expense submissions and approvals
+- Message notifications
+- System announcements
+- Payment reminders
+
+**Delivery Methods**:
+- In-app notifications
+- Push notifications (iOS/Android)
+- Email notifications
+- SMS notifications (future enhancement)
+
+### 4.9 Onboarding Experience
+**Purpose**: Smooth user activation and data setup
+
+**Flow**:
+1. **Welcome & Account Creation**
+   - Email/password or social login
+   - Terms acceptance
+   - Basic profile setup
+
+2. **Family Setup**
+   - Add children (name, DOB, photo)
+   - Custody arrangement selection
+   - School and activity information
+
+3. **Co-Parent Invitation**
+   - Email invitation system
+   - Pending invitation management
+   - Connection approval workflow
+
+4. **Initial Schedule Setup**
+   - Custody pattern selection
+   - Holiday schedule configuration
+   - First month calendar setup
+
+5. **Feature Tour**
+   - Interactive walkthrough
+   - Key feature highlights
+   - Quick tips and best practices
+
+### 4.10 Subscription & Billing
+**Purpose**: Manage trial and paid subscriptions
+
+**Features**:
+- 14-day free trial with full features
+- Subscription tiers (as per pricing page)
+- Payment method management
+- Billing history
+- Subscription pause/cancel options
+- Promo code support
+
+**Integration**: LemonSqueezy payment provider
+
+## 5. Technical Architecture
+
+### 5.1 Tech Stack
+
+**Frontend**:
+- **Framework**: React Native 0.73+ with Expo SDK 50+
+- **State Management**: Redux Toolkit + RTK Query
+- **Navigation**: React Navigation 6
+- **UI Components**: 
+  - Custom design system based on 2025 trends
+  - React Native Elements for base components
+  - React Native Reanimated 3 for animations
+- **Forms**: React Hook Form with Yup validation
+- **Styling**: Styled Components + Tailwind CSS (via NativeWind)
+- **Icons**: React Native Vector Icons + custom SVGs
+
+**Backend**:
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth with JWT tokens
+- **Real-time**: Supabase Realtime for live updates
+- **Storage**: Supabase Storage for files and media
+- **API**: Supabase auto-generated REST APIs + custom Edge Functions
+
+**Infrastructure**:
+- **Hosting**: 
+  - Web: Vercel/Netlify
+  - Mobile: App Store & Google Play
+- **CDN**: Cloudflare for static assets
+- **Monitoring**: Sentry for error tracking
+- **Analytics**: Mixpanel for user analytics
+- **Push Notifications**: OneSignal
+
+**Development Tools**:
+- **Version Control**: Git with GitHub
+- **CI/CD**: GitHub Actions
+- **Testing**: Jest + React Native Testing Library
+- **Code Quality**: ESLint + Prettier
+- **Documentation**: Storybook for component library
+
+### 5.2 Database Schema# Apparently Co-Parenting App - Product Requirements Document (PRD)
+
+## 1. Executive Summary
+
+### 1.1 Product Vision
+Apparently is a modern co-parenting application designed to simplify communication, coordination, and collaboration between separated parents. Built with React Native for cross-platform compatibility (iOS, Android, and Web), the app provides a centralized platform for managing custody schedules, sharing expenses, documenting children's moments, and maintaining healthy co-parenting relationships.
+
+### 1.2 Key Differentiators
+- **Multi-co-parenting support**: Unique ability to manage children with multiple co-parents
+- **Modern 2025 design**: Cutting-edge UI/UX following the latest design trends
+- **Cross-platform**: One codebase for web, iOS, and Android
+- **Privacy-focused**: Each co-parent only sees data related to their children
+- **Court-admissible records**: Tamper-proof documentation for legal purposes
+- **14-day free trial**: Risk-free evaluation period with premium features
+
+## 2. Market Analysis & Competitive Landscape
+
+### 2.1 Market Context
+Based on research of existing co-parenting apps (OurFamilyWizard, TalkingParents, AppClose, 2Houses, BestInterest), the market shows strong demand for digital co-parenting solutions. Key market insights:
+
+- Courts increasingly mandate or recommend co-parenting apps
+- Users prioritize ease of use, security, and comprehensive features
+- Price sensitivity exists, with many apps charging $10-25/month per parent
+- Free alternatives exist but lack premium features and court-admissible documentation
+
+### 2.2 Competitive Advantages
+- **Multi-partner support**: Unlike competitors, supports complex family structures
+- **Modern tech stack**: Superior performance and user experience
+- **Flexible pricing**: Competitive pricing through LemonSqueezy
+- **Design-first approach**: Focus on delightful user experience
+
+## 3. User Personas
+
+### 3.1 Primary Users
+1. **Recently Separated Parents**
+   - Need structure and boundaries in communication
+   - Seeking to reduce conflict and establish routines
+   - Value court-admissible documentation
+
+2. **Established Co-Parents**
+   - Have existing routines but need better organization
+   - Want to streamline expense tracking and scheduling
+   - Appreciate efficiency features
+
+3. **Multi-Partner Co-Parents**
+   - Have children with multiple ex-partners
+   - Need compartmentalized communication
+   - Require complex scheduling capabilities
+
+### 3.2 Secondary Users
+- Children (view-only access to relevant information)
+- Extended family members (grandparents, step-parents)
+- Legal professionals (attorneys, mediators)
+
+## 4. Core Features & Functionality
+
+### 4.1 Dashboard
+**Purpose**: Central hub for quick access to all features and notifications
+
+**Features**:
+- Personalized greeting with user's name
+- Today's schedule at a glance
+- Recent activity feed
+- Quick actions (add expense, create event, write journal entry)
+- Notification badges for pending items
+- Child switcher for multi-child families
+- Weekly/monthly overview widgets
+
+**Technical Requirements**:
+- Real-time data synchronization
+- Lazy loading for performance
+- Responsive grid layout using React Native's Flexbox
+- Pull-to-refresh functionality
+
+### 4.2 Calendar & Scheduling
+**Purpose**: Manage custody schedules, activities, and exchanges
+
+**Features**:
+- Visual custody calendar with color-coding per parent
+- Repeating schedule patterns (every other week, 2-2-3, etc.)
+- Single event creation and management
+- After-school activities tracking
+- Pick-up/drop-off location and time management
+- Schedule change requests with approval workflow
+- Holiday and special occasion management
+- Sync with device calendars (iOS Calendar, Google Calendar)
+- Time zone support for traveling parents
+
+**Technical Requirements**:
+- Custom calendar component with gesture support
+- Conflict detection algorithm
+- Push notifications for schedule changes
+- iCal export functionality
+
+### 4.3 Documents Area
+**Purpose**: Centralized storage for important child-related documents
+
+**Features**:
+- Organized folders per child
+- Document categories (medical, school, legal, identification)
+- File upload with preview (PDF, images, documents)
+- Version control for updated documents
+- Sharing permissions per document
+- Search functionality
+- Secure encryption for sensitive documents
+- Quick access to frequently used documents
+
+**Technical Requirements**:
+- Supabase Storage integration
+- File compression for faster uploads
+- Thumbnail generation for previews
+- End-to-end encryption for sensitive documents
+- Maximum file size: 50MB per document
+
+### 4.4 Journal & Moments
+**Purpose**: Share children's milestones, daily activities, and memories
+
+**Features**:
+- Rich text entries with formatting options
+- Photo and video uploads (multiple per entry)
+- Tagging system (#firstday, #milestone, #medical)
+- Comments and reactions from co-parents
+- Private notes option (not shared)
+- Timeline view of all entries
+- Search and filter capabilities
+- Export options for creating memory books
+
+**Technical Requirements**:
+- WYSIWYG editor implementation
+- Image optimization and compression
+- Video streaming capability
+- Lazy loading for media-heavy timelines
+- Background upload for large files
+
+### 4.5 Expense Management
+**Purpose**: Track shared expenses and manage reimbursements
+
+**Features**:
+- Expense entry with categories (medical, education, activities, etc.)
+- Receipt photo upload and attachment
+- Automatic split calculation (50/50, 60/40, custom)
+- Reimbursement requests and tracking
+- Payment status tracking (pending, paid, disputed)
+- Monthly/yearly expense reports
+- Export to CSV/PDF for tax purposes
+- Recurring expense support
+- Budget tracking and alerts
+
+**Technical Requirements**:
+- OCR integration for receipt scanning (future enhancement)
+- Real-time balance calculations
+- Data visualization for expense trends
+- Secure payment information handling (no actual payment processing in v1)
+
+### 4.6 Communication Hub
+**Purpose**: Centralized, documented communication between co-parents
+
+**Features**:
+- Threaded messaging system
+- Read receipts and timestamps
+- Uneditable message history (court-admissible)
+- File and photo sharing within messages
+- Message search functionality
+- Notification preferences (immediate, daily digest)
+- Translation support (future enhancement)
+- Emergency contact quick dial
+
+**Technical Requirements**:
+- End-to-end encryption for messages
+- Real-time messaging using Supabase Realtime
+- Message archival system
+- Export functionality for legal purposes
+
+### 4.7 Profile Management
+**Purpose**: User account and preference management
+
+**Features**:
+- Personal information management
+- Profile photo upload
+- Notification preferences
+- Privacy settings
+- Account security (2FA support)
+- Subscription management
+- Data export options
+- Account deletion with data retention options
+
+### 4.8 Notifications System
+**Purpose**: Keep users informed of important updates
+
+**Types**:
+- Schedule changes and requests
+- New journal entries
+- Expense submissions and approvals
+- Message notifications
+- System announcements
+- Payment reminders
+
+**Delivery Methods**:
+- In-app notifications
+- Push notifications (iOS/Android)
+- Email notifications
+- SMS notifications (future enhancement)
+
+### 4.9 Onboarding Experience
+**Purpose**: Smooth user activation and data setup
+
+**Flow**:
+1. **Welcome & Account Creation**
+   - Email/password or social login
+   - Terms acceptance
+   - Basic profile setup
+
+2. **Family Setup**
+   - Add children (name, DOB, photo)
+   - Custody arrangement selection
+   - School and activity information
+
+3. **Co-Parent Invitation**
+   - Email invitation system
+   - Pending invitation management
+   - Connection approval workflow
+
+4. **Initial Schedule Setup**
+   - Custody pattern selection
+   - Holiday schedule configuration
+   - First month calendar setup
+
+5. **Feature Tour**
+   - Interactive walkthrough
+   - Key feature highlights
+   - Quick tips and best practices
+
+### 4.10 Subscription & Billing
+**Purpose**: Manage trial and paid subscriptions
+
+**Features**:
+- 14-day free trial with full features
+- Subscription tiers (as per pricing page)
+- Payment method management
+- Billing history
+- Subscription pause/cancel options
+- Promo code support
+
+**Integration**: LemonSqueezy payment provider
+
+## 5. Technical Architecture
+
+### 5.1 Tech Stack
+
+**Frontend**:
+- **Framework**: React Native 0.73+ with Expo SDK 50+
+- **State Management**: Redux Toolkit + RTK Query
+- **Navigation**: React Navigation 6
+- **UI Components**: 
+  - Custom design system based on 2025 trends
+  - React Native Elements for base components
+  - React Native Reanimated 3 for animations
+- **Forms**: React Hook Form with Yup validation
+- **Styling**: Styled Components + Tailwind CSS (via NativeWind)
+- **Icons**: React Native Vector Icons + custom SVGs
+
+**Backend**:
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth with JWT tokens
+- **Real-time**: Supabase Realtime for live updates
+- **Storage**: Supabase Storage for files and media
+- **API**: Supabase auto-generated REST APIs + custom Edge Functions
+
+**Infrastructure**:
+- **Hosting**: 
+  - Web: Vercel/Netlify
+  - Mobile: App Store & Google Play
+- **CDN**: Cloudflare for static assets
+- **Monitoring**: Sentry for error tracking
+- **Analytics**: Mixpanel for user analytics
+- **Push Notifications**: OneSignal
+
+**Development Tools**:
+- **Version Control**: Git with GitHub
+- **CI/CD**: GitHub Actions
+- **Testing**: Jest + React Native Testing Library
+- **Code Quality**: ESLint + Prettier
+- **Documentation**: Storybook for component library
+
+### 5.2 Database Schema
+
+```sql
+-- Core Tables
+profiles (
+  id uuid primary key,
+  email text unique,
+  full_name text,
+  phone text,
+  avatar_url text,
+  notification_preferences jsonb,
+  subscription_status text,
+  subscription_expires_at timestamp,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+children (
+  id uuid primary key,
+  name text,
+  date_of_birth date,
+  photo_url text,
+  medical_info jsonb,
+  school_info jsonb,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+parent_child_relationships (
+  id uuid primary key,
+  parent_id uuid references profiles(id),
+  child_id uuid references children(id),
+  relationship_type text, -- 'parent', 'guardian', etc.
+  custody_percentage integer,
+  is_primary boolean,
+  created_at timestamp
+)
+
+-- Calendar & Scheduling
+custody_schedules (
+  id uuid primary key,
+  child_id uuid references children(id),
+  parent_id uuid references profiles(id),
+  start_date timestamp,
+  end_date timestamp,
+  is_recurring boolean,
+  recurrence_pattern jsonb,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+activities (
+  id uuid primary key,
+  child_id uuid references children(id),
+  name text,
+  type text,
+  location text,
+  schedule jsonb,
+  responsible_parent_id uuid,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+-- Communication
+messages (
+  id uuid primary key,
+  sender_id uuid references profiles(id),
+  recipient_id uuid references profiles(id),
+  child_id uuid references children(id),
+  content text,
+  attachments jsonb,
+  read_at timestamp,
+  created_at timestamp
+)
+
+-- Journal
+journal_entries (
+  id uuid primary key,
+  child_id uuid references children(id),
+  author_id uuid references profiles(id),
+  title text,
+  content text,
+  media_urls jsonb,
+  tags text[],
+  is_private boolean,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+-- Expenses
+expenses (
+  id uuid primary key,
+  child_id uuid references children(id),
+  created_by uuid references profiles(id),
+  amount decimal,
+  category text,
+  description text,
+  receipt_url text,
+  split_type text,
+  split_details jsonb,
+  status text,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+-- Documents
+documents (
+  id uuid primary key,
+  child_id uuid references children(id),
+  uploaded_by uuid references profiles(id),
+  name text,
+  category text,
+  file_url text,
+  file_size integer,
+  is_encrypted boolean,
+  permissions jsonb,
+  created_at timestamp,
+  updated_at timestamp
+)
+```
+
+### 5.3 Security & Privacy
+
+**Authentication**:
+- JWT-based authentication with refresh tokens
+- Biometric authentication support (Face ID, Touch ID)
+- Two-factor authentication (2FA) option
+- Session management with automatic timeout
+
+**Data Protection**:
+- Row Level Security (RLS) in Supabase
+- End-to-end encryption for sensitive data
+- HTTPS everywhere
+- Regular security audits
+- GDPR compliance
+
+**Privacy Features**:
+- Granular permission controls
+- Data isolation between co-parents
+- Audit logs for data access
+- Right to be forgotten implementation
+
+### 5.4 Performance Optimization
+
+**Mobile**:
+- Lazy loading for lists and images
+- Image caching and optimization
+- Offline mode with data sync
+- Background task optimization
+- Memory management for media-heavy features
+
+**Web**:
+- Code splitting and lazy loading
+- Service worker for offline capability
+- Image optimization with WebP
+- CDN distribution
+- Browser caching strategies
+
+## 6. Design System
+
+### 6.1 Design Principles
+
+**Modern & Trendy (2025)**:
+- Bold typography with variable fonts
+- Vibrant color palettes with electric accents
+- Glassmorphism and neumorphism effects
+- Micro-animations and haptic feedback
+- 3D elements and depth
+- Dark mode as default with light mode option
+
+**User-Centric**:
+- Intuitive navigation patterns
+- Consistent interaction models
+- Accessibility-first approach
+- Responsive design across all devices
+- Gesture-based interactions
+
+### 6.2 Visual Design
+
+**Color Palette**:
+```
+Primary: Electric Blue (#0066FF)
+Secondary: Vibrant Purple (#8B5CF6)
+Accent: Neon Mint (#10F9B7)
+Success: Emerald (#10B981)
+Warning: Amber (#F59E0B)
+Error: Rose (#F43F5E)
+Background Dark: #0A0A0B
+Background Light: #FAFAFA
+Surface Dark: #1A1A1C
+Surface Light: #FFFFFF
+```
+
+**Typography**:
+- Headers: Inter Variable (Bold, 32-48px)
+- Body: Inter Variable (Regular, 16-18px)
+- UI Elements: SF Pro Display (Medium, 14-16px)
+
+**Components**:
+- Rounded corners (16-24px radius)
+- Soft shadows with blur
+- Glass morphism overlays
+- Animated transitions (300ms ease)
+- Haptic feedback on interactions
+- Skeleton loaders for content
+
+### 6.3 Interaction Patterns
+
+**Gestures**:
+- Swipe to delete/archive
+- Pull to refresh
+- Pinch to zoom (photos)
+- Long press for context menus
+- Double tap to like/react
+
+**Animations**:
+- Page transitions with shared elements
+- Micro-animations on interactions
+- Loading states with progress indicators
+- Success/error feedback animations
+- Parallax scrolling effects
+
+## 7. Development Roadmap
+
+### 7.1 MVP (Phase 1) - 3 months
+**Core Features**:
+- User authentication and profiles
+- Basic calendar with custody schedules
+- Simple expense tracking
+- Document storage
+- Basic messaging
+- Journal entries (text only)
+- Single child support only
+
+**Technical**:
+- Basic React Native setup
+- Supabase integration
+- Core UI components
+- iOS and Android deployment
+
+### 7.2 Phase 2 - 2 months
+**Enhanced Features**:
+- Multi-co-parent support
+- Photo/video in journal
+- Advanced calendar features
+- Expense reports and analytics
+- Push notifications
+- Onboarding flow
+- Web application
+
+**Technical**:
+- Performance optimization
+- Offline mode
+- Advanced UI animations
+- Web deployment
+
+### 7.3 Phase 3 - 2 months
+**Premium Features**:
+- Court-admissible exports
+- Advanced document management
+- Recurring expenses
+- Calendar sync
+- Guest access
+- Translation support
+- AI-powered insights
+
+**Technical**:
+- Security hardening
+- Scalability improvements
+- Advanced analytics
+- Third-party integrations
+
+### 7.4 Future Enhancements
+- AI-powered conflict resolution
+- Video calling integration
+- Therapy and mediation tools
+- Financial planning features
+- Educational resources
+- Community features
+- White-label solutions
+
+## 8. Success Metrics
+
+### 8.1 User Metrics
+- Monthly Active Users (MAU)
+- Daily Active Users (DAU)
+- User retention (30, 60, 90 days)
+- Trial to paid conversion rate
+- Average session duration
+- Feature adoption rates
+
+### 8.2 Business Metrics
+- Monthly Recurring Revenue (MRR)
+- Customer Acquisition Cost (CAC)
+- Customer Lifetime Value (CLV)
+- Churn rate
+- Net Promoter Score (NPS)
+
+### 8.3 Technical Metrics
+- App crash rate (<1%)
+- API response time (<200ms)
+- App load time (<2s)
+- Uptime (99.9%)
+- User-reported bugs
+
+## 9. Legal & Compliance
+
+### 9.1 Requirements
+- COPPA compliance for children's data
+- GDPR compliance for EU users
+- CCPA compliance for California users
+- HIPAA considerations for medical information
+- Court admissibility standards
+
+### 9.2 Terms of Service
+- Clear data ownership policies
+- Privacy policy
+- Acceptable use policy
+- Subscription terms
+- Dispute resolution
+
+## 10. Launch Strategy
+
+### 10.1 Beta Testing
+- Closed beta with 50 families
+- Feedback collection and iteration
+- Bug fixes and performance optimization
+- Feature validation
+
+### 10.2 Soft Launch
+- Limited geographic release
+- Marketing to targeted segments
+- Community building
+- Influencer partnerships
+
+### 10.3 Full Launch
+- App Store optimization
+- Content marketing strategy
+- Social media campaigns
+- Legal professional partnerships
+- Referral program
+
+## 11. Support & Documentation
+
+### 11.1 User Support
+- In-app help center
+- Video tutorials
+- FAQ section
+- Email support
+- Community forum
+
+### 11.2 Developer Documentation
+- API documentation
+- Component library
+- Architecture guides
+- Deployment procedures
+- Troubleshooting guides
+
+## 12. Conclusion
+
+Apparently represents a significant advancement in co-parenting technology, addressing the unique needs of modern families with multiple co-parenting relationships. By combining cutting-edge design with robust functionality and a privacy-first approach, the app is positioned to become the leading solution in the co-parenting app market.
+
+The focus on user experience, combined with comprehensive features and flexible pricing, creates a compelling value proposition for separated parents seeking to maintain healthy co-parenting relationships while protecting their children's best interests.
+
+```sql
+-- Core Tables
+profiles (
+  id uuid primary key,
+  email text unique,
+  full_name text,
+  phone text,
+  avatar_url text,
+  notification_preferences jsonb,
+  subscription_status text,
+  subscription_expires_at timestamp,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+children (
+  id uuid primary key,
+  name text,
+  date_of_birth date,
+  photo_url text,
+  medical_info jsonb,
+  school_info jsonb,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+parent_child_relationships (
+  id uuid primary key,
+  parent_id uuid references profiles(id),
+  child_id uuid references children(id),
+  relationship_type text, -- 'parent', 'guardian', etc.
+  custody_percentage integer,
+  is_primary boolean,
+  created_at timestamp
+)
+
+-- Calendar & Scheduling
+custody_schedules (
+  id uuid primary key,
+  child_id uuid references children(id),
+  parent_id uuid references profiles(id),
+  start_date timestamp,
+  end_date timestamp,
+  is_recurring boolean,
+  recurrence_pattern jsonb,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+activities (
+  id uuid primary key,
+  child_id uuid references children(id),
+  name text,
+  type text,
+  location text,
+  schedule jsonb,
+  responsible_parent_id uuid,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+-- Communication
+messages (
+  id uuid primary key,
+  sender_id uuid references profiles(id),
+  recipient_id uuid references profiles(id),
+  child_id uuid references children(id),
+  content text,
+  attachments jsonb,
+  read_at timestamp,
+  created_at timestamp
+)
+
+-- Journal
+journal_entries (
+  id uuid primary key,
+  child_id uuid references children(id),
+  author_id uuid references profiles(id),
+  title text,
+  content text,
+  media_urls jsonb,
+  tags text[],
+  is_private boolean,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+-- Expenses
+expenses (
+  id uuid primary key,
+  child_id uuid references children(id),
+  created_by uuid references profiles(id),
+  amount decimal,
+  category text,
+  description text,
+  receipt_url text,
+  split_type text,
+  split_details jsonb,
+  status text,
+  created_at timestamp,
+  updated_at timestamp
+)
+
+-- Documents
+documents (
+  id uuid primary key,
+  child_id uuid references children(id),
+  uploaded_by uuid references profiles(id),
+  name text,
+  category text,
+  file_url text,
+  file_size integer,
+  is_encrypted boolean,
+  permissions jsonb,
+  created_at timestamp,
+  updated_at timestamp
+)
+```
+
+### 5.3 Security & Privacy
+
+**Authentication**:
+- JWT-based authentication with refresh tokens
+- Biometric authentication support (Face ID, Touch ID)
+- Two-factor authentication (2FA) option
+- Session management with automatic timeout
+
+**Data Protection**:
+- Row Level Security (RLS) in Supabase
+- End-to-end encryption for sensitive data
+- HTTPS everywhere
+- Regular security audits
+- GDPR compliance
+
+**Privacy Features**:
+- Granular permission controls
+- Data isolation between co-parents
+- Audit logs for data access
+- Right to be forgotten implementation
+
+### 5.4 Performance Optimization
+
+**Mobile**:
+- Lazy loading for lists and images
+- Image caching and optimization
+- Offline mode with data sync
+- Background task optimization
+- Memory management for media-heavy features
+
+**Web**:
+- Code splitting and lazy loading
+- Service worker for offline capability
+- Image optimization with WebP
+- CDN distribution
+- Browser caching strategies
+
+## 6. Design System
+
+### 6.1 Design Principles
+
+**Modern & Trendy (2025)**:
+- Bold typography with variable fonts
+- Vibrant color palettes with electric accents
+- Glassmorphism and neumorphism effects
+- Micro-animations and haptic feedback
+- 3D elements and depth
+- Dark mode as default with light mode option
+
+**User-Centric**:
+- Intuitive navigation patterns
+- Consistent interaction models
+- Accessibility-first approach
+- Responsive design across all devices
+- Gesture-based interactions
+
+### 6.2 Visual Design
+
+**Color Palette**:
+```
+Primary: Electric Blue (#0066FF)
+Secondary: Vibrant Purple (#8B5CF6)
+Accent: Neon Mint (#10F9B7)
+Success: Emerald (#10B981)
+Warning: Amber (#F59E0B)
+Error: Rose (#F43F5E)
+Background Dark: #0A0A0B
+Background Light: #FAFAFA
+Surface Dark: #1A1A1C
+Surface Light: #FFFFFF
+```
+
+**Typography**:
+- Headers: Inter Variable (Bold, 32-48px)
+- Body: Inter Variable (Regular, 16-18px)
+- UI Elements: SF Pro Display (Medium, 14-16px)
+
+**Components**:
+- Rounded corners (16-24px radius)
+- Soft shadows with blur
+- Glass morphism overlays
+- Animated transitions (300ms ease)
+- Haptic feedback on interactions
+- Skeleton loaders for content
+
+### 6.3 Interaction Patterns
+
+**Gestures**:
+- Swipe to delete/archive
+- Pull to refresh
+- Pinch to zoom (photos)
+- Long press for context menus
+- Double tap to like/react
+
+**Animations**:
+- Page transitions with shared elements
+- Micro-animations on interactions
+- Loading states with progress indicators
+- Success/error feedback animations
+- Parallax scrolling effects
+
+## 7. Development Roadmap
+
+### 7.1 MVP (Phase 1) - 3 months
+**Core Features**:
+- User authentication and profiles
+- Basic calendar with custody schedules
+- Simple expense tracking
+- Document storage
+- Basic messaging
+- Journal entries (text only)
+- Single child support only
+
+**Technical**:
+- Basic React Native setup
+- Supabase integration
+- Core UI components
+- iOS and Android deployment
+
+### 7.2 Phase 2 - 2 months
+**Enhanced Features**:
+- Multi-co-parent support
+- Photo/video in journal
+- Advanced calendar features
+- Expense reports and analytics
+- Push notifications
+- Onboarding flow
+- Web application
+
+**Technical**:
+- Performance optimization
+- Offline mode
+- Advanced UI animations
+- Web deployment
+
+### 7.3 Phase 3 - 2 months
+**Premium Features**:
+- Court-admissible exports
+- Advanced document management
+- Recurring expenses
+- Calendar sync
+- Guest access
+- Translation support
+- AI-powered insights
+
+**Technical**:
+- Security hardening
+- Scalability improvements
+- Advanced analytics
+- Third-party integrations
+
+### 7.4 Future Enhancements
+- AI-powered conflict resolution
+- Video calling integration
+- Therapy and mediation tools
+- Financial planning features
+- Educational resources
+- Community features
+- White-label solutions
+
+## 8. Success Metrics
+
+### 8.1 User Metrics
+- Monthly Active Users (MAU)
+- Daily Active Users (DAU)
+- User retention (30, 60, 90 days)
+- Trial to paid conversion rate
+- Average session duration
+- Feature adoption rates
+
+### 8.2 Business Metrics
+- Monthly Recurring Revenue (MRR)
+- Customer Acquisition Cost (CAC)
+- Customer Lifetime Value (CLV)
+- Churn rate
+- Net Promoter Score (NPS)
+
+### 8.3 Technical Metrics
+- App crash rate (<1%)
+- API response time (<200ms)
+- App load time (<2s)
+- Uptime (99.9%)
+- User-reported bugs
+
+## 9. Legal & Compliance
+
+### 9.1 Requirements
+- COPPA compliance for children's data
+- GDPR compliance for EU users
+- CCPA compliance for California users
+- HIPAA considerations for medical information
+- Court admissibility standards
+
+### 9.2 Terms of Service
+- Clear data ownership policies
+- Privacy policy
+- Acceptable use policy
+- Subscription terms
+- Dispute resolution
+
+## 10. Launch Strategy
+
+### 10.1 Beta Testing
+- Closed beta with 50 families
+- Feedback collection and iteration
+- Bug fixes and performance optimization
+- Feature validation
+
+### 10.2 Soft Launch
+- Limited geographic release
+- Marketing to targeted segments
+- Community building
+- Influencer partnerships
+
+### 10.3 Full Launch
+- App Store optimization
+- Content marketing strategy
+- Social media campaigns
+- Legal professional partnerships
+- Referral program
+
+## 11. Support & Documentation
+
+### 11.1 User Support
+- In-app help center
+- Video tutorials
+- FAQ section
+- Email support
+- Community forum
+
+### 11.2 Developer Documentation
+- API documentation
+- Component library
+- Architecture guides
+- Deployment procedures
+- Troubleshooting guides
+
+## 12. Conclusion
+
+Apparently represents a significant advancement in co-parenting technology, addressing the unique needs of modern families with multiple co-parenting relationships. By combining cutting-edge design with robust functionality and a privacy-first approach, the app is positioned to become the leading solution in the co-parenting app market.
+
+The focus on user experience, combined with comprehensive features and flexible pricing, creates a compelling value proposition for separated parents seeking to maintain healthy co-parenting relationships while protecting their children's best interests.
