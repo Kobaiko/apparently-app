@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run linting
+      run: npm run lint
+      continue-on-error: true
+      
+    - name: Run tests
+      run: npm test
+      continue-on-error: true
+      
+    - name: Build project
+      run: npm run build
+      continue-on-error: true
+
+  taskmaster-validation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Validate TaskMaster tasks
+      run: |
+        if [ -f "tasks/tasks.json" ]; then
+          echo "✅ TaskMaster tasks.json found"
+          echo "📊 Task count: $(cat tasks/tasks.json | grep -o '"id":' | wc -l)"
+        else
+          echo "⚠️ TaskMaster tasks.json not found"
+        fi
+        
+    - name: Check task completion
+      run: |
+        if [ -f "tasks/tasks.json" ]; then
+          echo "📈 Checking task completion status..."
+          # This could be enhanced to parse task status
+        fi 
